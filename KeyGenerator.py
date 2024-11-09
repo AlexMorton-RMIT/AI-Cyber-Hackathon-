@@ -9,8 +9,8 @@ from cryptography.hazmat.primitives import serialization
 import random
 
 def main(): 
-
-    characters = string.ascii_letters + string.digits
+    length = random.randint(1,10)
+    characters = "qwertyuiopasdfghjklzxcvbnm1234567890"
     Password = ''.join(random.choices(characters, k=length))
     Create_RSA_keys(Password)
 
@@ -33,6 +33,7 @@ def Create_RSA_keys(Password):
         encryption_algorithm=serialization.BestAvailableEncryption(private_key_pass)
     )
     
+    #create private key pem file
     with open("private_key.pem", "wb") as f:
         f.write(pem_private_key)
         
@@ -41,9 +42,9 @@ def Create_RSA_keys(Password):
         encoding=serialization.Encoding.PEM,
         format=serialization.PublicFormat.SubjectPublicKeyInfo)
     
+    #create public key pem file
     with open("public_key.pem", "wb") as f:
         f.write(pem_public_key)
 
-main
-#test password code below
-##Create_RSA_keys("Password")
+#run main
+main()
